@@ -21,12 +21,17 @@ public class Trip {
     private long organizerId;
     private String name;
     private LocalDateTime start;
+    @Column(name="\"end\"")
     private LocalDateTime end;
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
     private List<Message> messages;
     @ElementCollection
     private List<Long> placesId;
     @ElementCollection
     private List<Long> routesId;
+
+    public static void main(String[] args) {
+        System.out.println(LocalDateTime.now());
+    }
 
 }

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -16,7 +17,7 @@ import java.util.List;
 public class TripMapper {
     @Autowired
     private MapService mapService;
-    TripDto map(Trip trip){
+    public TripDto map(Trip trip){
         return TripDto.builder()
                 .id(trip.getId())
                 .start(trip.getStart())
@@ -30,10 +31,12 @@ public class TripMapper {
     }
 
     private List<LocationDto> retrieveLocations(Trip trip){
+        if(trip.getPlacesId()==null) return Collections.emptyList();
         return trip.getPlacesId().stream().map(id -> mapService.getLocation(id)).toList();
     }
 
     private List<RouteDto> retrieveRoutes(Trip trip){
+        if(trip.getRoutesId()==null) return Collections.emptyList();
         return trip.getRoutesId().stream().map(id -> mapService.getRoute(id)).toList();
     }
 }

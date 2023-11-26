@@ -7,8 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-@Component
-@FeignClient(name = "map-service")
+@FeignClient(name = "MAP-SERVICE")
 public interface MapService {
     @PostMapping("/api/location")
     LocationDto createLocation(@RequestBody String json);
